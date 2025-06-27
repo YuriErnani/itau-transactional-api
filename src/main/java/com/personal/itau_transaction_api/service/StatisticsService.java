@@ -21,6 +21,10 @@ public class StatisticsService {
         log.info("Search for transaction statistics has begun");
         List<TransactionalDTO> transactions = transactionalService.searchAllTransactions(searchRange);
 
+        if(transactions.isEmpty()) {
+            return new StatisticsResponseDTO(0L, 0.0, 0.0, 0.0, 0.0);
+        }
+
         DoubleSummaryStatistics transactionalStatistics = transactions.stream()
                 .mapToDouble(TransactionalDTO::value).summaryStatistics();
 
