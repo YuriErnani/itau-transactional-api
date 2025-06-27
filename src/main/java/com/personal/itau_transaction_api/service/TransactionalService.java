@@ -32,17 +32,22 @@ public class TransactionalService {
         }
 
         transactionaList.add(transactionalDTO);
+        log.info("Transactions added successfully");
 
     }
 
     public void deleteAllTransactional() {
+        log.info("Processing to delete transactions has started");
         transactionaList.clear();
+        log.info("Transactions deleted successfully");
     }
 
     public List<TransactionalDTO> searchAllTransactions(Integer searchRange) {
 
+        log.info("Started searching for transactions for the defined time");
         OffsetDateTime dateAndTimeRange = OffsetDateTime.now().minusSeconds(searchRange);
 
+        log.info("Successful return of transactions");
         return transactionaList.stream()
                 .filter(t -> t.dateTime().isAfter(dateAndTimeRange)).toList();
 
